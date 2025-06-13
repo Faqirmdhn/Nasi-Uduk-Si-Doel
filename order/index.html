@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<head>
+    <title>Pesan Nasi Uduk - Nasi Uduk Si Doel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Nasi Uduk <span>Si Doel</span></div>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Order Section -->
+    <section class="order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pesan Nasi Uduk</h2>
+                <p>Isi form berikut untuk memesan nasi uduk favorit Anda</p>
+            </div>
+
+            <div class="order-container">
+                <div class="order-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Pilih Menu</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Data Diri</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Konfirmasi</div>
+                    </div>
+                </div>
+
+                <form id="orderForm">
+                    <!-- Step 1: Menu Selection -->
+                    <div class="form-step" id="step1">
+                        <h3>Pilih Menu Nasi Uduk</h3>
+                        <div class="menu-options">
+                            <label class="menu-item-select selected">
+                                <input type="radio" name="menu" value="nasi_uduk_biasa" checked>
+                                <div class="menu-item-info">
+                                    <h4>Nasi Uduk Original</h4>
+                                    <p>Nasi uduk dengan tempe, tahu, sayur-sayuran, sambal kacang, dan kerupuk</p>
+                                </div>
+                                <div class="menu-item-price">Rp 15.000</div>
+                            </label>
+
+                            <label class="menu-item-select">
+                                <input type="radio" name="menu" value="nasi_uduk_special">
+                                <div class="menu-item-info">
+                                    <h4>Nasi Uduk Special</h4>
+                                    <p>Nasi uduk dengan ayam goreng, tempe, telur, sambal kacang, dan kerupuk</p>
+                                </div>
+                                <div class="menu-item-price">Rp 25.000</div>
+                            </label>
+
+                            <label class="menu-item-select">
+                                <input type="radio" name="menu" value="nasi_uduk_komplit">
+                                <div class="menu-item-info">
+                                    <h4>Nasi Uduk Komplit</h4>
+                                    <p>Nasi uduk dengan ayam bakar, tempe, tahu, telur, sambal, lalapan, dan kerupuk</p>
+                                </div>
+                                <div class="menu-item-price">Rp 30.000</div>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Jumlah Pesanan</label>
+                            <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Catatan Tambahan (opsional)</label>
+                            <textarea id="notes" name="notes" placeholder="Contoh: Pedas level 2, tidak pakai telur, dll."></textarea>
+                        </div>
+
+                        <button type="button" class="btn btn-block" onclick="nextStep(1, 2)">Lanjut ke Data Diri</button>
+                    </div>
+
+                    <!-- Step 2: Personal Data -->
+                    <div class="form-step" id="step2" style="display:none;">
+                        <h3>Data Diri Pemesan</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Nomor Telepon</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Alamat Lengkap</label>
+                            <textarea id="address" name="address" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment">Metode Pembayaran</label>
+                            <select id="payment" name="payment" required>
+                                <option value="">-- Pilih Metode Pembayaran --</option>
+                                <option value="cash">Tunai saat diterima (COD)</option>
+                                <option value="transfer">Transfer Bank</option>
+                                <option value="e-wallet">E-Wallet (OVO/Gopay/Dana)</option>
+                            </select>
+                        </div>
+
+                        <div class="order-summary">
+                            <h3>Ringkasan Pesanan</h3>
+                            <div class="summary-item">
+                                <span id="summary-menu">Nasi Uduk Original</span>
+                                <span id="summary-price">Rp 20.000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Jumlah: <span id="summary-quantity">1</span></span>
+                                <span id="summary-total">Rp 20.000</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total Pembayaran:</span>
+                                <span id="summary-grand-total">Rp 20.000</span>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn" onclick="prevStep(2, 1)">Kembali</button>
+                            <button type="button" class="btn btn-block" onclick="nextStep(2, 3)">Lanjut ke Konfirmasi</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirmation -->
+                    <div class="form-step" id="step3" style="display:none;">
+                        <h3>Konfirmasi Pesanan</h3>
+                        <p>Silakan periksa kembali data pesanan Anda sebelum mengirim:</p>
+
+                        <div class="order-summary">
+                            <h4>Detail Pesanan</h4>
+                            <div class="summary-item">
+                                <span>Menu:</span>
+                                <span id="confirm-menu">Nasi Uduk Original</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Jumlah:</span>
+                                <span id="confirm-quantity">1</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Catatan:</span>
+                                <span id="confirm-notes">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total:</span>
+                                <span id="confirm-total">Rp 20.000</span>
+                            </div>
+
+                            <h4 style="margin-top: 20px;">Data Pemesan</h4>
+                            <div class="summary-item">
+                                <span>Nama:</span>
+                                <span id="confirm-name">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Telepon:</span>
+                                <span id="confirm-phone">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Alamat:</span>
+                                <span id="confirm-address">-</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Pembayaran:</span>
+                                <span id="confirm-payment">-</span>
+                            </div>
+
+                            <div class="summary-total">
+                                <span>Total Pembayaran:</span>
+                                <span id="confirm-grand-total">Rp 20.000</span>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn" onclick="prevStep(3, 2)">Kembali</button>
+                            <button type="submit" class="btn btn-block">Kirim Pesanan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p>Nasi Uduk Si Doel menyajikan nasi uduk dengan cita rasa autentik Betawi sejak 2010.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hubungi Kami</h3>
+                    <p>No., Jl. Kamal Raya No.5, RT.6/RW.4, Cengkareng Barat, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11730</p>
+                    <p>0812377373</p>
+                    <p>nasiuduksidoel@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Media Sosial</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook">facebook</i></a>
+                        <a href="#"><i class="fab fa-instagram">instagram</i></a>
+                        <a href="#"><i class="fab fa-whatsapp">whatsapp</i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Nasi Uduk Si Doel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
